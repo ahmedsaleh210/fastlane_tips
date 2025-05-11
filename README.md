@@ -18,6 +18,7 @@ This project uses [Fastlane](https://fastlane.tools/) to automate building and d
   ```bash
   firebase login:ci
   ```
+You will get firebase_cli_token in terminal
 
 ## 🔧 Firebase App Distribution
 
