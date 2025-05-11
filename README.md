@@ -20,6 +20,21 @@ This project uses [Fastlane](https://fastlane.tools/) to automate building and d
   ```
 You will get firebase_cli_token in terminal
 
+### ✅ Step 1: Initialize Fastlane in Your Project
+
+In the **root directory** of your Flutter project, run:
+
+```bash
+cd android or ios
+fastlane init
+```
+
+* Select the platform (ios or android) when prompted.
+* Choose **Manual Setup** if you want to edit the Fastfile yourself.
+* This creates a fastlane/ directory with a Fastfile and Appfile.
+
+---
+
 ## 🔧 Firebase App Distribution
 
 ### ✅ Android Lane
@@ -37,7 +52,7 @@ platform :android do
       firebase_app_distribution(
           app: "<Enter the App ID from Firebase>",
           testers: "ahmed.saleh212020@gmail.com, ahmed.saleh212022@gmail.com",
-          firebase_cli_token: "token",
+          firebase_cli_token: "Token generated using firebase login:ci",
           release_notes: "Finish App",
           firebase_cli_path: "/usr/local/bin/firebase",
           android_artifact_type: "APK",
@@ -64,7 +79,7 @@ platform :ios do
       output_directory: "./build/Runner",
       export_options: {
         provisioningProfiles: { 
-          "com.aait.elmansak" => "com.aait.elmansak AppStore"
+          "com.app.test" => "com.app.test AppStore" #Change com.app.test to your bundle id
         }
       }
     )
