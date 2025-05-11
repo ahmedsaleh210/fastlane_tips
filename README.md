@@ -1,4 +1,3 @@
-````markdown
 # 🚀 Mobile App Deployment with Fastlane
 
 This project uses [Fastlane](https://fastlane.tools/) to automate building and distributing your mobile apps for both **Android** and **iOS**, supporting:
@@ -156,4 +155,3 @@ fastlane beta
   ```ruby
   firebase_cli_token: ENV["FIREBASE_TOKEN"]
   ```
-* Never commit Firebase tokens or App Store credentials to version control.
