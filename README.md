@@ -137,6 +137,10 @@ platform :ios do
 end
 ```
 
+## How to get issuer_id, key_id, AuthKey_certificate:
+<img width="1440" alt="Screenshot 2025-05-11 at 1 26 30 PM" src="https://github.com/user-attachments/assets/67065b50-08b3-459d-aab9-05726c00494a" />
+
+
 ---
 
 ## 🚀 Usage
