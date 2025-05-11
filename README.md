@@ -35,6 +35,10 @@ fastlane init
 
 ---
 
+## 🔧 Get Firebase App ID
+![fire_and_5](https://github.com/user-attachments/assets/d090b7a3-11a3-4aa6-ae7e-577c4377adda)
+
+
 ## 🔧 Firebase App Distribution
 
 ### ✅ Android Lane
