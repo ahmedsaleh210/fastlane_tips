@@ -1,19 +1,64 @@
-# iOS App Distribution with Fastlane & Firebase
+You're right — here's the corrected `README.md` with **proper Markdown formatting** and code blocks:
 
-This project uses [Fastlane](https://fastlane.tools/) to automate the process of building an iOS app and distributing it to beta testers using **Firebase App Distribution**.
+---
 
-## Platform
+````markdown
+# 🚀 Mobile App Deployment with Fastlane
 
-- **iOS**
+This project uses [Fastlane](https://fastlane.tools/) to automate building and distributing your mobile apps for both **Android** and **iOS**, supporting:
+- Firebase App Distribution (Android & iOS)
+- TestFlight (iOS)
 
-## Purpose
+---
 
-This Fastlane configuration defines a custom lane `distribute` which:
-1. Builds the iOS app using Xcode.
-2. Exports the `.ipa` file with a specified provisioning profile and export method.
-3. Uploads the build to Firebase App Distribution and notifies the testers.
+## 📦 Prerequisites
 
-## Fastlane Lane: `distribute`
+- Install [Fastlane](https://docs.fastlane.tools/getting-started/ios/setup/)
+- Install Firebase CLI:  
+  ```bash
+  npm install -g firebase-tools
+````
+
+* Authenticate and generate a Firebase CLI token:
+
+  ```bash
+  firebase login:ci
+  ```
+
+---
+
+## 🔧 Firebase App Distribution
+
+### ✅ Android Lane
+
+Distributes the Android APK using Firebase App Distribution.
+
+```ruby
+platform :android do
+  desc "Build the Android app and distribute it to beta testers using Firebase App Distribution"
+  gradle(
+      task: 'assemble',
+      build_type: 'Release'
+  )
+  lane :distribute do
+      firebase_app_distribution(
+          app: "1:640697085052:android:62660527d0335614516df9",
+          testers: "ahmed.saleh212020@gmail.com, ahmed.saleh212022@gmail.com",
+          firebase_cli_token: "token",
+          release_notes: "Finish App",
+          firebase_cli_path: "/usr/local/bin/firebase",
+          android_artifact_type: "APK",
+          android_artifact_path: "../build/app/outputs/apk/release/app-release.apk"
+      )
+  end
+end
+```
+
+---
+
+### ✅ iOS Firebase Distribution
+
+Builds and distributes the iOS app using Firebase App Distribution.
 
 ```ruby
 platform :ios do
@@ -26,7 +71,7 @@ platform :ios do
       output_directory: "./build/Runner",
       export_options: {
         provisioningProfiles: { 
-          "com.aait.abr" => "com.aait.abr AppStore"
+          "com.aait.elmansak" => "com.aait.elmansak AppStore"
         }
       }
     )
@@ -40,41 +85,79 @@ platform :ios do
     )
   end
 end
-````
+```
 
-### Breakdown
+---
 
-#### `build_app(...)`
+## 🍏 iOS TestFlight Deployment
 
-* **scheme**: The scheme used to build the app (typically your app's name, here it's `Runner`).
-* **archive\_path**: Where the archive will be saved.
-* **export\_method**: The method for exporting (e.g., `app-store`, `ad-hoc`, `development`, etc.).
-* **output\_directory**: Where the `.ipa` file and other build artifacts will be saved.
-* **export\_options.provisioningProfiles**: Specifies the provisioning profile to use for the app bundle ID.
+Uploads a new version of the iOS app to TestFlight via App Store Connect.
 
-#### `firebase_app_distribution(...)`
+```ruby
+default_platform(:ios)
 
-* **app**: Firebase App ID for the iOS app.
-* **testers**: A comma-separated list of emails to notify testers.
-* **firebase\_cli\_token**: The token used for authenticating the Firebase CLI (keep this secure).
-* **release\_notes**: Notes to display in the release email.
-* **firebase\_cli\_path**: Full path to the installed Firebase CLI.
-* **ipa\_path**: Path to the generated `.ipa` file to upload.
+platform :ios do
+  desc "Push a new beta build to TestFlight"
+  lane :beta do
+    increment_version_number(
+        version_number: "1.0.1", # Set your desired version here
+        xcodeproj: "Runner.xcodeproj"
+    )
+    increment_build_number(
+      xcodeproj: "Runner.xcodeproj", 
+      build_number: "3" # Set desired build number here
+    )
 
-## Prerequisites
+    build_app(workspace: "Runner.xcworkspace", scheme: "Runner")
 
-* Install [Fastlane](https://docs.fastlane.tools/getting-started/ios/setup/)
-* Install [Firebase CLI](https://firebase.google.com/docs/cli)
-* Authenticate Firebase CLI and generate a token if needed:
+    api_key = app_store_connect_api_key(
+      key_id: "Key ID",
+      issuer_id: "Issuer ID",
+      key_filepath: "./fastlane/AuthKey_NTBP6NWLU6.p8",
+      duration: 1200,
+      in_house: false
+    )
 
-  ```bash
-  firebase login:ci
-  ```
+    upload_to_testflight(
+      api_key: api_key
+    )
+  end
+end
+```
 
-## Running the Lane
+---
 
-To build and distribute the iOS app, run:
+## 🚀 Usage
+
+### Distribute Android via Firebase
 
 ```bash
-fastlane ios distribute
+cd android
+fastlane distribute
 ```
+
+### Distribute iOS via Firebase
+
+```bash
+cd ios
+fatlane distribute
+```
+
+### Upload iOS Build to TestFlight
+
+```bash
+cd ios
+fastlane beta
+```
+
+---
+
+## 🔐 Security Notes
+
+* Replace `"token"` with your actual `firebase_cli_token`.
+  It’s better to use an environment variable:
+
+  ```ruby
+  firebase_cli_token: ENV["FIREBASE_TOKEN"]
+  ```
+* Never commit Firebase tokens or App Store credentials to version control.
