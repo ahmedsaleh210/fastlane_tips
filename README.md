@@ -1,7 +1,3 @@
-You're right — here's the corrected `README.md` with **proper Markdown formatting** and code blocks:
-
----
-
 ````markdown
 # 🚀 Mobile App Deployment with Fastlane
 
