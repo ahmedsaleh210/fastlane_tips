@@ -34,7 +34,7 @@ platform :android do
   )
   lane :distribute do
       firebase_app_distribution(
-          app: "1:640697085052:android:62660527d0335614516df9",
+          app: "<Enter the App ID from Firebase>",
           testers: "ahmed.saleh212020@gmail.com, ahmed.saleh212022@gmail.com",
           firebase_cli_token: "token",
           release_notes: "Finish App",
