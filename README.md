@@ -1,6 +1,6 @@
 # 🚀 Mobile App Deployment with Fastlane
 
-This project uses [Fastlane](https://fastlane.tools/) to automate building and distributing your mobile apps for both **Android** and **iOS**, supporting:
+How to use [Fastlane](https://fastlane.tools/) to automate building and distributing your mobile apps for both **Android** and **iOS**, supporting:
 - Firebase App Distribution (Android & iOS)
 - TestFlight (iOS)
 
