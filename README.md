@@ -12,7 +12,7 @@ This project uses [Fastlane](https://fastlane.tools/) to automate building and d
 - Install Firebase CLI:  
   ```bash
   npm install -g firebase-tools
-````
+```
 
 * Authenticate and generate a Firebase CLI token:
 
