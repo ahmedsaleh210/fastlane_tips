@@ -138,7 +138,8 @@ end
 ```
 
 ## How to get issuer_id, key_id, AuthKey_certificate:
-<img width="1440" alt="Screenshot 2025-05-11 at 1 26 30 PM" src="https://github.com/user-attachments/assets/67065b50-08b3-459d-aab9-05726c00494a" />
+<img width="1000" alt="Screen-Shot-2022-07-24-at-23 31 34" src="https://github.com/user-attachments/assets/e2a589e4-f118-4646-9830-7e6ab04f9609" />
+
 
 
 ---
